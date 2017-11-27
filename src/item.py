@@ -8,4 +8,7 @@ class Item:
         return (container.loading() + self.size) <= container.capacity
     
     def __str__(self):
-        print(self.size)
+        return str(self.size)
+
+    def __repr__(self):
+        return self.__str__()
