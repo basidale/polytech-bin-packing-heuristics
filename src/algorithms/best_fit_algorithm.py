@@ -7,7 +7,8 @@ class BestFitAlgorithm:
     def findBin(self, bins, item, capacity):
         maxLoading = None
         mostFilledBins = list()
-        
+
+        # Finds the bin with the maximal residual capacity
         for b in bins:
             if maxLoading is None or b.loading() > maxLoading:
                 if item.isFittingInto(b):
@@ -18,15 +19,22 @@ class BestFitAlgorithm:
             elif b.loading() == maxLoading:
                 mostFilledBins.append(b)
 
+        # If there are more than one suitable bin, we choose the first
         if len(mostFilledBins) > 0:
             return mostFilledBins[0]
+        # If no bins is suitable, we open a new bin
         else:
             b = Bin(capacity)
             bins.append(b)
             return b
 
     def step(self, itemList, capacity, bins):
+        # Pops next item in the list
         item = itemList.pop(0)
+        
+        # Finds the most suitable bin
         b = self.findBin(bins, item, capacity)
+        
+        # Adds the item to the list
         b.addItem(item)
 

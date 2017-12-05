@@ -10,10 +10,9 @@ if __name__ == '__main__':
     inputFilePath = '../res/exemple100.txt'
     items, capacity = ItemReader(inputFilePath).readItems()
     
-    #algorithm = next_fit_algorithm.NextFitAlgorithm()
-    #algorithm = FirstFitAlgorithm()
+    algorithm = FirstFitAlgorithm()
     #algorithm = WorstFitAlgorithm()
     #algorithm = AlmostWorstFitAlgorithm()
-    algorithm = BestFitAlgorithm()
+    #algorithm = BestFitAlgorithm()
     simulation = Simulation(capacity, items, algorithm)
     simulation.run()
