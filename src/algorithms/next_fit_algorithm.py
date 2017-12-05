@@ -1,24 +1,29 @@
 from bin import Bin
 from item import Item
+from .bp_algorithm_strategy import IBinPackingAlgorithmStrategy
 
 # Algorithme glouton
-class NextFitAlgorithm:
+class NextFitAlgorithm(IBinPackingAlgorithmStrategy):
     NAME = 'Next Fit'
 
     def __init__(self):
         self.currentBinIndex = 0
 
-    def step(self, itemList, capacity, bins):
-        # Pops next item in the list
-        item = itemList.pop(0)
+    @staticmethod
+    def getName():
+        return NAME
 
+    def findBin(self, item, capacity, bins):
         # If the item does not fits into the current bin,
         # add one bin to the list and increment current bin index
         if (not item.isFittingInto(bins[self.currentBinIndex])):
-            self.currentBinIndex += 1
             bins.append(Bin(capacity))
+            self.currentBinIndex += 1
 
         # Add the item to the current bin
-        bins[self.currentBinIndex].addItem(item)
-    
-            
+        return bins[self.currentBinIndex]
+        
+        
+    def step(self, itemList, capacity, bins):
+        # Pops next item in the list
+        item = itemList.pop(0)

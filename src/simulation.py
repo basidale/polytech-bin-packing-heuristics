@@ -8,7 +8,8 @@ class Simulation:
         self.itemList = itemList
         self.algorithm = algorithm
         self.bins = [ Bin(capacity) ]
-    
+        self.currentItem = None
+        
     def run(self):
         print('Algorithme : ' + self.algorithm.NAME)
         print('Capacité : ' + str(self.capacity))
@@ -16,10 +17,21 @@ class Simulation:
         print('')
 
         self.printState()
-        while len(self.itemList) > 0:
-            self.algorithm.step(self.itemList, self.capacity, self.bins)
-            self.printState()
-    
+        while not self.isCompleted():
+            self.step()
+            self.printState()        
+
+    # TODO: Replace algorithm.step() -> algorithm.findBin()
+    def step(self):
+        # Pops next item in the list
+        self.currentItem = self.itemList.pop(0)
+
+        b = self.algorithm.findBin(self.currentItem, self.capacity, self.bins)
+        b.addItem(self.currentItem)
+
+    def isCompleted(self):
+        return len(self.itemList) == 0
+            
     def printState(self):
         print('Items restants : ' + str(len(self.itemList)))
         

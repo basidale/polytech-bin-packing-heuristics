@@ -2,6 +2,7 @@ from simulation import Simulation
 from item import Item
 from algorithms import *
 from reader import ItemReader
+from xml_generator import XMLGenerator
 
 # TODO: Check python 3 standards
 if __name__ == '__main__':
@@ -10,9 +11,23 @@ if __name__ == '__main__':
     inputFilePath = '../res/exemple100.txt'
     items, capacity = ItemReader(inputFilePath).readItems()
     
-    algorithm = FirstFitAlgorithm()
-    #algorithm = WorstFitAlgorithm()
-    #algorithm = AlmostWorstFitAlgorithm()
-    #algorithm = BestFitAlgorithm()
-    simulation = Simulation(capacity, items, algorithm)
-    simulation.run()
+    firstFitAlgorithm = FirstFitAlgorithm()
+    worstFitAlgorithm = WorstFitAlgorithm()
+    almostWorstFitAlgorithm = AlmostWorstFitAlgorithm()
+    nextFitAlgorithm = NextFitAlgorithm()
+    bestFitAlgorithm = BestFitAlgorithm()
+
+    algorithms = [ firstFitAlgorithm,
+                   nextFitAlgorithm,
+                   worstFitAlgorithm,
+                   almostWorstFitAlgorithm,
+                   bestFitAlgorithm ]
+
+    for algorithm in algorithms:
+        outputFileName = algorithm.NAME.replace(' ', '-')
+        outputFileName = outputFileName.lower()
+        outputFileName = '../simulations/' + outputFileName + '-example100.xml'
+        
+        simulation = Simulation(capacity, list(items), algorithm)
+        generator = XMLGenerator(simulation)        
+        generator.generate(outputFileName)

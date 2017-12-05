@@ -1,5 +1,8 @@
 ** TODO:
 * Reader .txt
 
+* Ensure that script may be launched from every directory (res ~~)
+* Ajouter interface BPalgorithm
+* Ensure compatible with project standards
 ** A la fin :
 * Virer dossier algorithme pour le rendu

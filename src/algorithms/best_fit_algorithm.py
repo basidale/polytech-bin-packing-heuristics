@@ -1,10 +1,15 @@
 from bin import Bin
 from item import Item
+from .bp_algorithm_strategy import IBinPackingAlgorithmStrategy
 
-class BestFitAlgorithm:
+class BestFitAlgorithm(IBinPackingAlgorithmStrategy):
     NAME = 'Best Fit'
 
-    def findBin(self, bins, item, capacity):
+    @staticmethod
+    def getName():
+        return NAME
+    
+    def findBin(self, item, capacity, bins):
         maxLoading = None
         mostFilledBins = list()
 
