@@ -5,13 +5,15 @@ from reader import ItemReader
 
 # TODO: Check python 3 standards
 if __name__ == '__main__':
-    capacity = 15
-    inputFilePath = '../res/data.csv'
-    itemList = ItemReader(inputFilePath).readItems()
-
+    # TODO: Put in file
+    #inputFilePath = '../res/data.csv'
+    inputFilePath = '../res/exemple100.txt'
+    items, capacity = ItemReader(inputFilePath).readItems()
+    
     #algorithm = next_fit_algorithm.NextFitAlgorithm()
     #algorithm = FirstFitAlgorithm()
     #algorithm = WorstFitAlgorithm()
-    algorithm = AlmostWorstFitAlgorithm()
-    simulation = Simulation(capacity, itemList, algorithm)
+    #algorithm = AlmostWorstFitAlgorithm()
+    algorithm = BestFitAlgorithm()
+    simulation = Simulation(capacity, items, algorithm)
     simulation.run()

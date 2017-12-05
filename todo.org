@@ -1,0 +1,5 @@
+** TODO:
+* Reader .txt
+
+** A la fin :
+* Virer dossier algorithme pour le rendu

@@ -1,4 +1,5 @@
 from .next_fit_algorithm import NextFitAlgorithm
 from .first_fit_algorithm import FirstFitAlgorithm
+from .best_fit_algorithm import BestFitAlgorithm
 from .worst_fit_algorithm import WorstFitAlgorithm
 from .almost_worst_fit_algorithm import AlmostWorstFitAlgorithm
