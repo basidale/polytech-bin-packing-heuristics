@@ -6,8 +6,11 @@
   + moyenne, ecart de remplissage des bins
   + Nombre d'étapes
   + en fonction des examples, de la capacité
+  + Worst Fit / Almost worst fit comparaison
 * Affichage graphique de la trace
 * Argumenter : quel algorithme est le plus efficace
+* Makefile : Generer 2 scripts
+* Inclure lxml
 
 ** Eric :
 * Génerer samples aléatoires (loi normale, uniforme, etc)
