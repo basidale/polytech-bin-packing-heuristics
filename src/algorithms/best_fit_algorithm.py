@@ -16,7 +16,7 @@ class BestFitAlgorithm(IBinPackingAlgorithmStrategy):
             bins.append(b)
             return b
         
-        fitting = sorted(fitting, key=lambda x: x.loading(), reverse=True)
+        fitting = sorted(fitting, key=lambda x: x.loading())
         bests = [ e for e in fitting if e.loading() == fitting[0].loading() ]
         bests.sort()
         

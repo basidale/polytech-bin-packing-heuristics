@@ -1,20 +1,20 @@
 import unittest
 from bin import Bin
 from item import Item
-from algorithms import BestFitAlgorithm
+from algorithms import AlmostWorstFitAlgorithm
 
-class BestFitAlgorithmTest(unittest.TestCase):
+class AlmostWorstFitAlgorithmTest(unittest.TestCase):
     capacity=100
 
     def setUp(self):
-        self.bestFit = BestFitAlgorithm()
+        self.almostWorstFit = AlmostWorstFitAlgorithm()
         self.bins=list()
-        self.bins.append(Bin(BestFitAlgorithmTest.capacity))
+        self.bins.append(Bin(AlmostWorstFitAlgorithmTest.capacity))
         
     def test_findBin(self):
-        capacity = BestFitAlgorithmTest.capacity
+        capacity = AlmostWorstFitAlgorithmTest.capacity
         sizeItems=[ 50, 90, 10, 20, 40, 70, 15, 60, 15, 22 ]
-
+        
         for size in sizeItems:
             item = Item(size)
             binQuantity = len(self.bins)
@@ -24,7 +24,7 @@ class BestFitAlgorithmTest(unittest.TestCase):
             expectedQuantity = binQuantity + (1 if binOpened else 0)
             expectedLoading = size + (0 if binOpened else expectedBin.loading())
             
-            b = self.bestFit.findBin(item, capacity, self.bins)
+            b = self.almostWorstFit.findBin(item, capacity, self.bins)
             b.addItem(item)
 
             if not binOpened:
@@ -37,8 +37,11 @@ class BestFitAlgorithmTest(unittest.TestCase):
         if (len(fitting) == 0):
             return None
         
-        fitting = sorted(fitting, key=lambda x: x.loading())
-        bests = [ e for e in fitting if e.loading() == fitting[0].loading() ]
-        bests.sort()
+        fitting = sorted(fitting, key=lambda x: x.loading(), reverse=True)
+        worsts = [ e for e in fitting if e.loading() == fitting[0].loading() ]
+        worsts.sort()
         
-        return bests[0]
+        if (len(worsts) == 1):
+            return worsts[0]
+
+        return worsts[1]

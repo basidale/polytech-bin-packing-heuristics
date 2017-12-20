@@ -9,29 +9,15 @@ class WorstFitAlgorithm(IBinPackingAlgorithmStrategy):
     def getName():
         return NAME
     
-    def findEmptiestBins(self, bins):
-        minLoading = None
-        emptiestBins = list()
-        
-        # Finds the bin with the minimal residual capacity
-        for b in bins:
-            if minLoading is None or b.loading() < minLoading:
-                minLoading = b.loading()
-                del emptiestBins[:]
-                emptiestBins.append(b)
-            
-            elif b.loading() == minLoading:
-                emptiestBins.append(b)
-        
-        return emptiestBins
-    
-    # Returns the first among all suitable bins
     def findBin(self, item, capacity, bins):
-        b = self.findEmptiestBins(bins)[0]
-
-        # If no bin is suitable, we add one bin to the list
-        if not item.isFittingInto(b):
+        fitting = [ e for e in bins if item.isFittingInto(e) ]
+        if (len(fitting) == 0):
             b = Bin(capacity)
             bins.append(b)
-
-        return b
+            return b
+        
+        fitting = sorted(fitting, key=lambda x: x.loading(), reverse=True)
+        worsts = [ e for e in fitting if e.loading() == fitting[0].loading() ]
+        worsts.sort()
+        
+        return worsts[0]

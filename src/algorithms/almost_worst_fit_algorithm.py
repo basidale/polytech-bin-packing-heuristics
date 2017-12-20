@@ -7,23 +7,16 @@ class AlmostWorstFitAlgorithm(WorstFitAlgorithm):
     NAME = 'Almost Worst Fit'
 
     def findBin(self, item, capacity, bins):
-        sortedBins = sorted(bins, key=lambda x: x.loading())
-        sortedBins.sort()
-        
-        emptiest = sortedBins[0]
-        secondEmptiest = None
-
-        if (len(sortedBins) > 1):
-            sortedBins = [e for e in sortedBins if e.loading() != sortedBins[0].loading()]
-            secondEmptiest = sortedBins[0]
-
-        b = None
-        if secondEmptiest is not None and item.isFittingInto(secondEmptiest):
-            b = secondEmptiest
-        elif item.isFittingInto(emptiest):
-            b = emptiest
-        else:
+        fitting = [ e for e in bins if item.isFittingInto(e) ]
+        if (len(fitting) == 0):
             b = Bin(capacity)
             bins.append(b)
+            return b
         
-        return b
+        fitting = sorted(fitting, key=lambda x: x.loading(), reverse=True)
+        worsts = [ e for e in fitting if e.loading() == fitting[0].loading() ]
+        worsts.sort()
+
+        if (len(worsts) == 1):
+            return worsts[0]
+        return worsts[1]
