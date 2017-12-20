@@ -7,7 +7,9 @@ class AlmostWorstFitAlgorithm(WorstFitAlgorithm):
     NAME = 'Almost Worst Fit'
 
     def findBin(self, item, capacity, bins):
-        sortedBins = sorted(bins)
+        sortedBins = sorted(bins, key=lambda x: x.loading())
+        sortedBins.sort()
+        
         emptiest = sortedBins[0]
         secondEmptiest = None
 

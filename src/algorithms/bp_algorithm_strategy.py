@@ -9,3 +9,4 @@ class IBinPackingAlgorithmStrategy(metaclass=ABCMeta):
     @abstractmethod
     def findBin(self, item, capacity, bins):
         return
+        
