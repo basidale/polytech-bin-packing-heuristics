@@ -4,6 +4,7 @@ class Item:
     def __init__(self, size):
         self.size = size
 
+    # TODO: Rename fitsInto
     def isFittingInto(self, container):
         return (container.loading() + self.size) <= container.capacity
     

@@ -22,8 +22,3 @@ class NextFitAlgorithm(IBinPackingAlgorithmStrategy):
 
         # Add the item to the current bin
         return bins[self.currentBinIndex]
-        
-        
-    def step(self, itemList, capacity, bins):
-        # Pops next item in the list
-        item = itemList.pop(0)

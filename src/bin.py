@@ -1,3 +1,6 @@
+from functools import total_ordering
+
+@total_ordering
 class Bin:
     def __init__(self, capacity):
         self.itemList = list()
@@ -18,4 +21,10 @@ class Bin:
         percentage = round(percentage, 2)
         
         return str(binLoading) + ' / ' + str(self.capacity) + ' [' + str(percentage) + '%]'
+
+    def __lt__(self, other):
+        return self.loading() < other.loading()
+    
+    def __eq__(self, other):
+        return loading() == other.loading()
 
