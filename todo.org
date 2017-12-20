@@ -1,8 +1,22 @@
 ** TODO:
-* Reader .txt
+* Génerer samples aléatoires (loi normale, uniforme, etc)
+* Prendre en compte les autres samples
+* Faire des tests unitaires
+* Faire des statistiques 
+  + moyenne, ecart de remplissage des bins
+  + Nombre d'étapes
+  + en fonction des examples, de la capacité
+* Affichage graphique de la trace
+* Argumenter : quel algorithme est le plus efficace
 
-* Ensure that script may be launched from every directory (res ~~)
-* Ajouter interface BPalgorithm
-* Ensure compatible with project standards
+** Eric :
+* Génerer samples aléatoires (loi normale, uniforme, etc)
+
+** Basil:
+* Affichage graphique de la trace
+
 ** A la fin :
 * Virer dossier algorithme pour le rendu
+* Ensure that script may be launched from every directory (res ~~)
+* Ensure compatible with project standards
+

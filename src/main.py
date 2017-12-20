@@ -25,7 +25,7 @@ if __name__ == '__main__':
                    worstFitAlgorithm,
                    almostWorstFitAlgorithm,
                    bestFitAlgorithm ]
-    
+
     for algorithm in algorithms:
         outputFileName = algorithm.NAME.replace(' ', '-')
         outputFileName = outputFileName.lower()
