@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="step">
+      <span class="step-numero">Etape n°0</span>
+      <div id="bins">
+	<div class="bin">
+	  <span class="capacity">100</span>
+	  <div class="loading" style="width:68%">
+	    <span class="loading-value">68</span>
+	  </div>
+	</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-numero">Etape n°1</span>
+      <div id="bins">
+	<div class="bin">
+	<span class="capacity">100</span>
+	  <div class="loading" style="width:68%">
+	    <span class="loading-value">68</span>
+	  </div>
+	</div>
+	<div class="bin">
+	  <span class="capacity">100</span>
+	  <div class="loading" style="width:32%">
+	    <span class="loading-value">32</span>
+	  </div>
+	</div>
+      </div>
+    </div>
+  </body>
+</html>

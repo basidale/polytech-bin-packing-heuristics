@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:template match="execution">
+    <html>
+      <head>
+	<link rel="stylesheet" href="style.css" />
+      </head>
+      <body>
+	<xsl:apply-templates></xsl:apply-templates>
+      </body>
+    </html>
+  </xsl:template>
+
+  <xsl:template match="step">
+    <div class="step">
+      <xsl:apply-templates></xsl:apply-templates>
+    </div>
+  </xsl:template>
+
+  <xsl:template match="numero">
+    <span class="step-numero">Etape n°<xsl:value-of select="text()" /></span>
+  </xsl:template>
+
+  <xsl:template match="remaining"><!-- TODO : handle --></xsl:template>
+  <xsl:template match="item-size"><!-- TODO : handle --></xsl:template>
+
+  <xsl:template match="bins">
+    <div id="bins">
+      <xsl:apply-templates></xsl:apply-templates>
+    </div>
+  </xsl:template>
+
+  <xsl:template match="bin">
+    <div class="bin">
+      <xsl:apply-templates></xsl:apply-templates>
+    </div>
+  </xsl:template>
+
+  <xsl:template match="index"></xsl:template>
+  
+  <xsl:template match="capacity">
+    <span class="capacity">
+      <xsl:value-of select="text()" />
+    </span>
+  </xsl:template>
+
+  <xsl:template match="loading">
+    <div class="empty">
+      <xsl:attribute name="style">height:<xsl:value-of select="100 - text()" />%</xsl:attribute>
+      <xsl:value-of select="text()" />
+    </div>
+  </xsl:template>
+
+
+  
+</xsl:stylesheet>
+
