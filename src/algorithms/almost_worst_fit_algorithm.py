@@ -8,15 +8,20 @@ class AlmostWorstFitAlgorithm(WorstFitAlgorithm):
 
     def findBin(self, item, capacity, bins):
         fitting = [ e for e in bins if item.isFittingInto(e) ]
+        fitting.sort()
+        fitting.sort(key=lambda x: x.loading())
+        
         if (len(fitting) == 0):
             b = Bin(capacity)
             bins.append(b)
             return b
-        
-        fitting = sorted(fitting, key=lambda x: x.loading(), reverse=True)
-        worsts = [ e for e in fitting if e.loading() == fitting[0].loading() ]
-        worsts.sort()
+        else:
+            worsts = [ e for e in fitting if e.loading() == fitting[0].loading() ]
+            remaining = [e for e in fitting if e.loading() > worsts[0].loading() ]
+            
+            if len(remaining) == 0:
+                return worsts[0]
+            else:
+                return remaining[0]
 
-        if (len(worsts) == 1):
-            return worsts[0]
-        return worsts[1]
+

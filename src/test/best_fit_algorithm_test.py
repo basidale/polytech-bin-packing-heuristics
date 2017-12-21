@@ -10,35 +10,49 @@ class BestFitAlgorithmTest(unittest.TestCase):
         self.bestFit = BestFitAlgorithm()
         self.bins=list()
         self.bins.append(Bin(BestFitAlgorithmTest.capacity))
+        self.item80 = Item(80)
+        self.item40 = Item(40)
+        self.item10 = Item(10)
+
         
-    def test_findBin(self):
+    def test_findBin_general_case(self):
         capacity = BestFitAlgorithmTest.capacity
-        sizeItems=[ 50, 90, 10, 20, 40, 70, 15, 60, 15, 22 ]
-
-        for size in sizeItems:
-            item = Item(size)
-            binQuantity = len(self.bins)
-
-            expectedBin = self.expectedBin(item)
-            binOpened = (expectedBin is None)
-            expectedQuantity = binQuantity + (1 if binOpened else 0)
-            expectedLoading = size + (0 if binOpened else expectedBin.loading())
-            
-            b = self.bestFit.findBin(item, capacity, self.bins)
-            b.addItem(item)
-
-            if not binOpened:
-                self.assertEqual(expectedBin, b)
-            self.assertEqual(expectedQuantity, len(self.bins))
-            self.assertEqual(expectedLoading, b.loading())
-            
-    def expectedBin(self, item):
-        fitting = [ e for e in self.bins if item.isFittingInto(e) ]
-        if (len(fitting) == 0):
-            return None
         
-        fitting = sorted(fitting, key=lambda x: x.loading())
-        bests = [ e for e in fitting if e.loading() == fitting[0].loading() ]
-        bests.sort()
+        # General case
+        b80 = Bin(capacity)
+        b80.addItem(self.item80)
         
-        return bests[0]
+        b40 = Bin(capacity)
+        b40.addItem(self.item40)
+
+        b10 = Bin(capacity)
+        b10.addItem(self.item10)
+
+        self.bins[0] = b80
+        self.bins.append(b40)
+        self.bins.append(b10)
+
+        b = self.bestFit.findBin(self.item10, capacity, self.bins)
+        b.addItem(self.item10)
+
+        self.assertEqual(90, b80.loading())
+        self.assertEqual(40, b40.loading())
+        self.assertEqual(10, b10.loading())
+        self.assertEqual(3, len(self.bins))
+        
+    def test_no_fitting_bin(self):
+        capacity = BestFitAlgorithmTest.capacity
+                
+        b80 = Bin(capacity)
+        b80.addItem(self.item80)
+
+        self.bins[0] = b80
+
+        b = self.bestFit.findBin(self.item40, capacity, self.bins)
+        b.addItem(self.item40)
+
+        self.assertEqual(80, b80.loading())
+        self.assertEqual(2, len(self.bins))
+        self.assertEqual(40, self.bins[1].loading())
+        
+

@@ -32,6 +32,6 @@ if __name__ == '__main__':
         outputFileName = filePath + '/../simulations/' + outputFileName + '-example100.xml'
         
         simulation = Simulation(capacity, list(items), algorithm)
-        generator = XMLGenerator(simulation)        
+        generator = XMLGenerator(simulation)
         generator.generate(outputFileName)
 

@@ -12,13 +12,18 @@ class Bin:
         self.capacity = capacity
 
     def addItem(self, item):
+        loading = self.loading()
+        
+        if item.size + loading > self.capacity:
+            raise ValueError("Can't add item to bin (size : " + str(item.size) +
+                             "; bin : " + str(self) + ")")
         self.itemList.append(item)
     
     def loading(self):
-        loading = 0
+        value = 0
         for item in self.itemList:
-            loading += item.size
-        return loading
+            value += item.size
+        return value
     
     def __str__(self):
         binLoading = self.loading()

@@ -35,7 +35,7 @@ class XMLGenerator:
         if item:
             itemsize = SubElement(step, 'item-size')
             itemsize.text = str(self.simulation.currentItem.size)
-        
+
         bins = SubElement(step, 'bins')
         for index, b in enumerate(self.simulation.bins):
             binElement = SubElement(bins, 'bin')

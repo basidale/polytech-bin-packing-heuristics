@@ -14,30 +14,25 @@ class FirstFitAlgorithmTest(unittest.TestCase):
     def test_findBin(self):
         capacity = FirstFitAlgorithmTest.capacity
         sizeItems=[ 50, 90, 10, 20, 40, 70, 15, 60, 15, 22 ]
+        currentIndex = 0
+        binQuantity = len(self.bins)
 
         for size in sizeItems:
             item = Item(size)
-            binQuantity = len(self.bins)
-
-            expectedBin = self.expectedBin(item)
-            binOpened = (expectedBin is None)
-            expectedQuantity = binQuantity + (1 if binOpened else 0)
-            expectedLoading = size + (0 if binOpened else expectedBin.loading())
+            
+            # Filter bins where item fits in
+            fitting = [ e for e in self.bins if item.isFittingInto(e) ]
+            
+            if len(fitting) > 0:
+                expectedBin = fitting[0]
             
             b = self.firstFit.findBin(item, capacity, self.bins)
             b.addItem(item)
 
-            if not binOpened:
-                self.assertEqual(expectedBin, b)
-            self.assertEqual(expectedQuantity, len(self.bins))
-            self.assertEqual(expectedLoading, b.loading())
-            
-    def expectedBin(self, item):
-        fitting = [ e for e in self.bins if item.isFittingInto(e) ]
+            if len(fitting) > 0:
+                self.assertEqual(expectedBin, b);
+            else:
+                self.assertEqual(binQuantity + 1, len(self.bins))
+                self.assertEqual(self.bins[-1], b);
 
-        if (len(fitting) == 0):
-            return None
-
-        fitting.sort()
-        
-        return fitting[0]
+            binQuantity = len(self.bins)

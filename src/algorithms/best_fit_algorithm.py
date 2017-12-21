@@ -11,14 +11,16 @@ class BestFitAlgorithm(IBinPackingAlgorithmStrategy):
     
     def findBin(self, item, capacity, bins):
         fitting = [ e for e in bins if item.isFittingInto(e) ]
+
         if (len(fitting) == 0):
             b = Bin(capacity)
             bins.append(b)
             return b
         
-        fitting = sorted(fitting, key=lambda x: x.loading())
+        fitting.sort(key=lambda x: x.loading(), reverse=True)
         bests = [ e for e in fitting if e.loading() == fitting[0].loading() ]
         bests.sort()
+        
         
         return bests[0]
 

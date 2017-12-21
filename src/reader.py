@@ -24,5 +24,5 @@ class ItemReader:
         
         # Fill the item list with list of item size under string format
         items = [ Item(int(item)) for item in content[ITEMS_INDEX].split(', ') ]
-        
+
         return items, capacity
