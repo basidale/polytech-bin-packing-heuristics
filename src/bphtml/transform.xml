@@ -40,6 +40,7 @@
   <xsl:template match="loading">
     <div class="empty">
       <xsl:attribute name="style">height:<xsl:value-of select="100 - text()" />%</xsl:attribute>
+      <!-- Empty space in bin -->
     </div>
     <div class="loading">
       <xsl:attribute name="style">height:<xsl:value-of select="text()" />%</xsl:attribute>

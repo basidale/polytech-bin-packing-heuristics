@@ -3,4 +3,4 @@ generate:
 test:
 	python src/test.py
 html:
-	python src/html_generator.py
+	python src/bphtml/html_generator.py
