@@ -1,6 +1,4 @@
 ** TODO:
-* Génerer samples aléatoires (loi normale, uniforme, etc)
-* Prendre en compte les autres samples
 * Faire des tests unitaires
 * Faire des statistiques 
   + moyenne, ecart de remplissage des bins

@@ -2,3 +2,6 @@
 /src/algorithms/__pycache__/
 *~
 src/algorithms/*~
+/simulations/*.xml
+/src/bphtml/target/*html
+/src/test/__pycache__/*

@@ -5,33 +5,28 @@ from reader import ItemReader
 from xml_generator import XMLGenerator
 import os 
 
-# TODO: Check python 3 standards
 if __name__ == '__main__':
-    filePath = os.path.dirname(os.path.realpath(__file__))
-    
-    # TODO: Put in file
-    #inputFilePath = '../res/data.csv'
-    inputFilePath = filePath + '/../res/exemple100.txt'
-    items, capacity = ItemReader(inputFilePath).readItems()
-    
-    firstFitAlgorithm = FirstFitAlgorithm()
-    worstFitAlgorithm = WorstFitAlgorithm()
-    almostWorstFitAlgorithm = AlmostWorstFitAlgorithm()
-    nextFitAlgorithm = NextFitAlgorithm()
-    bestFitAlgorithm = BestFitAlgorithm()
-
-    algorithms = [ firstFitAlgorithm,
-                   nextFitAlgorithm,
-                   worstFitAlgorithm,
-                   almostWorstFitAlgorithm,
-                   bestFitAlgorithm ]
-
-    for algorithm in algorithms:
-        outputFileName = algorithm.NAME.replace(' ', '-')
-        outputFileName = outputFileName.lower()
-        outputFileName = filePath + '/../simulations/' + outputFileName + '-example100.xml'
+    sourcePath = os.path.dirname(os.path.realpath(__file__))
         
-        simulation = Simulation(capacity, list(items), algorithm)
-        generator = XMLGenerator(simulation)
-        generator.generate(outputFileName)
+    examples = [ 'exemple100.txt', 'exemple500.txt', 'exemple1000.txt' ]
+
+    for example in examples:
+        exampleName = example.split('.')[0]
+        inputFilePath = sourcePath + '/../res/' + example
+        items, capacity = ItemReader(inputFilePath).readItems()
+
+        algorithms = [ FirstFitAlgorithm(),
+                       NextFitAlgorithm(),
+                       WorstFitAlgorithm(),
+                       AlmostWorstFitAlgorithm(),
+                       BestFitAlgorithm() ]
+        
+        for algorithm in algorithms:
+            print(example + " " + algorithm.NAME)
+            outputFileName = algorithm.NAME.replace(' ', '-') + '-' + exampleName + '.xml'
+            outputFileName = outputFileName.lower()
+            outputFilePath = sourcePath + '/../simulations/' + outputFileName
+            simulation = Simulation(capacity, list(items), algorithm)
+            generator = XMLGenerator(simulation)
+            generator.generate(outputFilePath)
 
