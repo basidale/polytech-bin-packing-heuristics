@@ -17,9 +17,6 @@ class XMLGenerator:
 
         tree = ElementTree(self.top)
         tree.write(outputFilePath, pretty_print=True)
-        #print(tostring(self.top, pretty_print=True).decode())        
-        
-        #step = SubElement(top, 'step')
     
     def generateState(self):
         step = SubElement(self.top, 'step')
@@ -45,7 +42,12 @@ class XMLGenerator:
             
             capacity = SubElement(binElement, 'capacity')
             capacity.text = str(b.capacity)
-            
+
             loading = SubElement(binElement, 'loading')
             loading.text = str(b.loading())
+            
+            items = SubElement(binElement, 'items')
+            for item in b.itemList:
+                itemElement = SubElement(items, 'item')
+                itemElement.text = str(item.size)
             
