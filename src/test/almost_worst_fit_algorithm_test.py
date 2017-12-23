@@ -13,7 +13,7 @@ class AlmostWorstFitAlgorithmTest(unittest.TestCase):
         self.item80 = Item(80)
         self.item40 = Item(40)
         self.item10 = Item(10)
-
+    
         
     def test_findBin_general_case(self):
         capacity = AlmostWorstFitAlgorithmTest.capacity
@@ -33,7 +33,6 @@ class AlmostWorstFitAlgorithmTest(unittest.TestCase):
         self.bins.append(b10)
 
         b = self.almostWorstFit.findBin(self.item10, capacity, self.bins)
-        b.addItem(self.item10)
 
         self.assertEqual(80, b80.loading())
         self.assertEqual(50, b40.loading())
@@ -46,10 +45,10 @@ class AlmostWorstFitAlgorithmTest(unittest.TestCase):
         self.bins[0].addItem(self.item40)
         
         b = self.almostWorstFit.findBin(self.item10, capacity, self.bins)
-        b.addItem(self.item10)
         
         self.assertEqual(50, self.bins[0].loading())
         self.assertEqual(1, len(self.bins))
+        
         
     def test_findBin_one_fitting_bin(self):
         capacity = AlmostWorstFitAlgorithmTest.capacity
@@ -65,7 +64,6 @@ class AlmostWorstFitAlgorithmTest(unittest.TestCase):
         self.bins.append(b40)
         
         b = self.almostWorstFit.findBin(self.item80, capacity, self.bins)
-        b.addItem(self.item80)
         
         self.assertEqual(3, len(self.bins))        
         self.assertEqual(80, self.bins[2].loading())        
@@ -79,7 +77,6 @@ class AlmostWorstFitAlgorithmTest(unittest.TestCase):
         self.bins[0] = b80
 
         b = self.almostWorstFit.findBin(self.item40, capacity, self.bins)
-        b.addItem(self.item40)
 
         self.assertEqual(80, b80.loading())
         self.assertEqual(2, len(self.bins))

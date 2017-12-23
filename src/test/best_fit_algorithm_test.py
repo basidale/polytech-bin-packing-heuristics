@@ -33,7 +33,6 @@ class BestFitAlgorithmTest(unittest.TestCase):
         self.bins.append(b10)
 
         b = self.bestFit.findBin(self.item10, capacity, self.bins)
-        b.addItem(self.item10)
 
         self.assertEqual(90, b80.loading())
         self.assertEqual(40, b40.loading())

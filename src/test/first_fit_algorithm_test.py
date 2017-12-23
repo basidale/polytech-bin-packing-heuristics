@@ -27,7 +27,6 @@ class FirstFitAlgorithmTest(unittest.TestCase):
                 expectedBin = fitting[0]
             
             b = self.firstFit.findBin(item, capacity, self.bins)
-            b.addItem(item)
 
             if len(fitting) > 0:
                 self.assertEqual(expectedBin, b);

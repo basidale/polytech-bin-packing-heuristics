@@ -19,6 +19,9 @@ class NextFitAlgorithm(IBinPackingAlgorithmStrategy):
         if (not item.isFittingInto(bins[self.currentBinIndex])):
             bins.append(Bin(capacity))
             self.currentBinIndex += 1
-
+        
         # Add the item to the current bin
-        return bins[self.currentBinIndex]
+        bin_ = bins[self.currentBinIndex]
+        bin_.addItem(item)
+        
+        return bin_

@@ -13,7 +13,7 @@ class Bin:
 
     def addItem(self, item):
         loading = self.loading()
-        
+
         if item.size + loading > self.capacity:
             raise ValueError("Can't add item to bin (size : " + str(item.size) +
                              "; bin : " + str(self) + ")")

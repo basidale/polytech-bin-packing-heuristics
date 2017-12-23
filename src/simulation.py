@@ -27,7 +27,6 @@ class Simulation:
         self.currentItem = self.itemList.pop(0)
 
         b = self.algorithm.findBin(self.currentItem, self.capacity, self.bins)
-        b.addItem(self.currentItem)
 
     def isCompleted(self):
         return len(self.itemList) == 0

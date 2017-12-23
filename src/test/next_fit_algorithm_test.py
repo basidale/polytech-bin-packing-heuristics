@@ -20,7 +20,6 @@ class NextFitAlgorithmTest(unittest.TestCase):
         for size in sizeItems:
             item = Item(size)
             b = self.nextFit.findBin(item, capacity, self.bins)
-            b.addItem(item)
 
             if (len(self.bins) > binQuantity):
                 self.assertEqual(binQuantity + 1, len(self.bins))

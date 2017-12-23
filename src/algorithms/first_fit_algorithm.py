@@ -18,9 +18,10 @@ class FirstFitAlgorithm(IBinPackingAlgorithmStrategy):
                 return b
         
         # If no bins are suitable add one bin to the list
-        b = Bin(capacity)
-        bins.append(b)
+        bin_ = Bin(capacity)
+        bin_.addItem(self.currentItem)
+        bins.append(bin_)
 
-        return b
+        return bin_
 
     
