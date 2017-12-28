@@ -27,6 +27,7 @@ if __name__ == '__main__':
             outputFileName = outputFileName.lower()
             outputFilePath = sourcePath + '/../simulations/' + outputFileName
             simulation = Simulation(capacity, list(items), algorithm)
+            simulation.run()
             generator = XMLGenerator(simulation)
             generator.generate(outputFilePath)
 

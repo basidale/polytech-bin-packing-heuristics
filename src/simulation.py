@@ -11,7 +11,7 @@ class Simulation:
         self.currentItem = None
         
     def run(self):
-        print('Algorithme : ' + self.algorithm.NAME)
+        print('Lancement de l\'algorithme ' + self.algorithm.NAME)
         print('Capacité : ' + str(self.capacity))
         print('Items : ' + str(self.itemList))
         print('')
@@ -19,7 +19,9 @@ class Simulation:
         self.printState()
         while not self.isCompleted():
             self.step()
-            self.printState()        
+            self.printState()
+
+        print('\nAlgorithme ' + self.algorithm.NAME + ' terminé.')
 
     # TODO: Replace algorithm.step() -> algorithm.findBin()
     def step(self):
@@ -35,5 +37,5 @@ class Simulation:
         print('Items restants : ' + str(len(self.itemList)))
         
         for index, b in enumerate(self.bins):
-            print('(' + str(index) + ') ' + str(b))
+            print('Bin n°' + str(index) + ' : ' + str(b))
 

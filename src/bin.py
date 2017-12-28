@@ -30,7 +30,7 @@ class Bin:
         percentage = (binLoading / self.capacity) * 100
         percentage = round(percentage, 2)
         
-        return str(binLoading) + ' / ' + str(self.capacity) + ' [' + str(percentage) + '%]'
+        return 'Contenance : ' + str(binLoading) + ' / ' + str(self.capacity) + ' [' + str(percentage) + '%]'
     
     def __lt__(self, other):
         return self.number < other.number
