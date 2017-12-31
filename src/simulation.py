@@ -10,23 +10,23 @@ class Simulation:
         self.currentItem = None
         
     def run(self):
-        print('Lancement de l\'algorithme ' + self.algorithm.NAME)
-        print('Capacité : ' + str(self.capacity))
-        print('Items : ' + str(self.itemList))
-        print('')
+        #print('Lancement de l\'algorithme ' + self.algorithm.NAME)
+        # print('Capacité : ' + str(self.capacity))
+        # print('Items : ' + str(self.itemList))
+        # print('')
 
-        self.printState()
+        #self.printState()
         while not self.isCompleted():
             self.step()
-            self.printState()
+            #self.printState()
 
-        print('\nAlgorithme ' + self.algorithm.NAME + ' terminé.')
+        #print('\nAlgorithme ' + self.algorithm.NAME + ' terminé.')
 
     # TODO: Replace algorithm.step() -> algorithm.findBin()
     def step(self):
         # Pops next item in the list
         self.currentItem = self.itemList.pop(0)
-
+        
         b = self.algorithm.findBin(self.currentItem, self.capacity)
 
     def isCompleted(self):
@@ -35,6 +35,6 @@ class Simulation:
     def printState(self):
         print('Items restants : ' + str(len(self.itemList)))
         
-        for index, b in enumerate(self.bins):
+        for index, b in enumerate(sorted(self.algorithm.getBins())):
             print('Bin n°' + str(index) + ' : ' + str(b))
 

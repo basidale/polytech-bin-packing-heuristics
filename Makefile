@@ -1,3 +1,5 @@
+
+
 generate:
 	python src/main.py
 test:

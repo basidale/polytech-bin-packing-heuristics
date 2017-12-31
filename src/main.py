@@ -4,13 +4,11 @@ from algorithms import *
 from reader import ItemReader
 from xml_generator import XMLGenerator
 from random import randint
+import argparse
 import os 
 
-if __name__ == '__main__':
-    sourcePath = os.path.dirname(os.path.realpath(__file__))
-        
-    examples = [ 'exemple100.txt', 'exemple500.txt', 'exemple1000.txt' ]
 
+def executeAll(examples):
     for example in examples:
         exampleName = example.split('.')[0]
         inputFilePath = sourcePath + '/../res/' + example
@@ -28,11 +26,23 @@ if __name__ == '__main__':
             outputFileName = outputFileName.lower()
             outputFilePath = sourcePath + '/../simulations/' + outputFileName
             simulation = Simulation(capacity, list(items), algorithm)
-            simulation.run()
+            #simulation.run()
+            
             generator = XMLGenerator(simulation)
             generator.generate(outputFilePath)
-    
 
+if __name__ == '__main__':
+    sourcePath = os.path.dirname(os.path.realpath(__file__))
+
+    parser = argparse.ArgumentParser(description='TODO: write description')
+    parser.add_argument('--run', nargs=1, required=True, help='TODO:')
+    args = parser.parse_args()
+
+    if args.run[0] == 'ALGO':
+        examples = [ 'exemple100.txt', 'exemple500.txt', 'exemple1000.txt' ]
+        executeAll(examples)
+    else:
+        print('ERORO')
 
     """var = int(input('Entrez le nombre dexemples de tests:'))
     binSize = input('Entrez la taille des bins :')
