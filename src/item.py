@@ -5,7 +5,7 @@ class Item:
         self.size = size
 
     # TODO: Rename fitsInto
-    def isFittingInto(self, container):
+    def fintsInto(self, container):
         return (container.loading() + self.size) <= container.capacity
     
     def __str__(self):

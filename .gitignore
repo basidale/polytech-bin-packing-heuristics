@@ -5,3 +5,5 @@ src/algorithms/*~
 /simulations/*.xml
 /src/bphtml/target/*html
 /src/test/__pycache__/*
+/src/test/__pycache__
+/src/test/__pycache__/*

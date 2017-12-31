@@ -1,13 +1,12 @@
 from bin import Bin
 from item import Item
+from algorithms.AVLTree import AVLTree
 
 class Simulation:
-    
     def __init__(self, capacity, itemList, algorithm):
         self.capacity = capacity
         self.itemList = itemList
         self.algorithm = algorithm
-        self.bins = [ Bin(capacity) ]
         self.currentItem = None
         
     def run(self):
@@ -28,7 +27,7 @@ class Simulation:
         # Pops next item in the list
         self.currentItem = self.itemList.pop(0)
 
-        b = self.algorithm.findBin(self.currentItem, self.capacity, self.bins)
+        b = self.algorithm.findBin(self.currentItem, self.capacity)
 
     def isCompleted(self):
         return len(self.itemList) == 0

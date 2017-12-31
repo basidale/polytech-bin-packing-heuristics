@@ -8,7 +8,8 @@ class NextFitAlgorithm(IBinPackingAlgorithmStrategy):
 
     def __init__(self):
         self.currentBinIndex = 0
-
+        self.bins = []
+        
     @staticmethod
     def getName():
         return NAME
@@ -16,7 +17,7 @@ class NextFitAlgorithm(IBinPackingAlgorithmStrategy):
     def findBin(self, item, capacity, bins):
         # If the item does not fits into the current bin,
         # add one bin to the list and increment current bin index
-        if (not item.isFittingInto(bins[self.currentBinIndex])):
+        if (not item.fintsInto(bins[self.currentBinIndex])):
             bins.append(Bin(capacity))
             self.currentBinIndex += 1
         
@@ -25,3 +26,6 @@ class NextFitAlgorithm(IBinPackingAlgorithmStrategy):
         bin_.addItem(item)
         
         return bin_
+
+    def getBins(self):
+        return self.bins()

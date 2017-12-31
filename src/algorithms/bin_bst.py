@@ -6,27 +6,6 @@ class BinBST:
     def insert(self, bin_):
         self.root = self._insert(self.root, bin_)
         self.size += 1
-
-    def removeMin(self):
-        if (self.root.left is None):
-            data = self.root.data
-            self.root = None
-            return data
-
-        node = self._removeMin(self.root).data
-
-        return node
-        
-    def _removeMin(self, node):
-        if node.left is not None:
-            return self._removeMin(node.left)
-
-        if node.right is None:
-            node.parent.left = None
-        else:
-            node.parent.left = self._removeMin(node.right)
-            
-        return node
     
     def _insert(self, node, bin_):
         if node is None:
@@ -55,6 +34,29 @@ class BinBST:
         print(node.data)
         if node.right is not None:
             self._display(node.right)
+
+            
+    def removeMin(self):
+        if (self.root.left is None):
+            data = self.root.data
+            self.root = None
+            return data
+
+        node = self._removeMin(self.root).data
+
+        return node
+        
+    def _removeMin(self, node):
+        if node.left is not None:
+            return self._removeMin(node.left)
+
+        if node.right is None:
+            node.parent.left = None
+        else:
+            node.parent.left = self._removeMin(node.right)
+            
+        return node
+
     
     class Node:
         def __init__(self, data, right = None, left = None):

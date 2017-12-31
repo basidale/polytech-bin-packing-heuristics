@@ -15,7 +15,7 @@ if __name__ == '__main__':
         exampleName = example.split('.')[0]
         inputFilePath = sourcePath + '/../res/' + example
         items, capacity = ItemReader(inputFilePath).readItems()
-
+        
         algorithms = [ FirstFitAlgorithm(),
                        NextFitAlgorithm(),
                        WorstFitAlgorithm(),
@@ -31,7 +31,7 @@ if __name__ == '__main__':
             simulation.run()
             generator = XMLGenerator(simulation)
             generator.generate(outputFilePath)
-
+    
 
 
     """var = int(input('Entrez le nombre dexemples de tests:'))

@@ -24,7 +24,10 @@ class Bin:
         for item in self.itemList:
             value += item.size
         return value
-    
+
+    def residual(self):
+        return self.capacity - self.loading()
+
     def __str__(self):
         binLoading = self.loading()
         percentage = (binLoading / self.capacity) * 100

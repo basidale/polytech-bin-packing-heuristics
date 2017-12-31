@@ -7,10 +7,7 @@ class IBinPackingAlgorithmStrategy(metaclass=ABCMeta):
         return
     
     @abstractmethod
-    def findBin(self, item, capacity, bins, bst):
+    def findBin(self, item, capacity):
         return
         
-    @abstractmethod
-    def getBins(self):
-        return
     

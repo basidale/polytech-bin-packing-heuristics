@@ -39,6 +39,7 @@ class BinBSTTest(unittest.TestCase):
         self.assertEqual(tree.root.data, bin50)
     
     def test_min(self):
+        print('FOO')
         loadings = [ 85, 12, 35, 96, 34, 96, 12, 7, 12, 2, 21, 2, 9, 3 ]
         shuffle(loadings)
         
