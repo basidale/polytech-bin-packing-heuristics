@@ -118,6 +118,41 @@ class WorstFitAlgorithmTest(unittest.TestCase):
         self.assertEqual(80, b80.loading())
         self.assertEqual(2, len(bins))
         self.assertEqual(40, bins[1].loading())
+
+    
+    def test_findbin2(self):
+        capacity = WorstFitAlgorithmTest.capacity
+        sizeItems=[ 50, 90, 10, 20, 40, 70, 15, 60, 15, 22, 91, 34, 50, 13 ]
+        currentIndex = 0
+        binQuantity = 0
+        
+        for size in sizeItems:
+            item = Item(size)
+            bins = self.worstFit.getBins()
+            expectedBin = self.findExpectedBin(bins, item)
+
+            b = self.worstFit.findBin(item, capacity)
+
+            bins = sorted(self.worstFit.getBins())
+            if expectedBin is not None:
+                self.assertEqual(expectedBin, b)
+            else:
+                self.assertEqual(binQuantity + 1, len(bins))
+                self.assertEqual(size, b.loading());
+            
+            binQuantity = len(bins)
+            
+    def findExpectedBin(self, bins, item):
+        fitting = [ e for e in bins if item.fitsInto(e) ]
+        
+        if (len(fitting) == 0):
+            return None
+        
+        fitting.sort(key=lambda x: x.loading())
+        worsts = [ e for e in fitting if e.loading() == fitting[0].loading() ]
+        worsts.sort()
+        
+        return worsts[0]
     
     @staticmethod
     def binOfLoading(loading):

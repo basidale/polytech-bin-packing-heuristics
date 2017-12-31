@@ -118,7 +118,7 @@ class AlmostWorstFitAlgorithmTest(unittest.TestCase):
             binQuantity = len(bins)
             
     def findExpectedBin(self, bins, item):
-        fitting = [ e for e in bins if item.fintsInto(e) ]
+        fitting = [ e for e in bins if item.fitsInto(e) ]
         fitting.sort()
         fitting.sort(key=lambda x: x.loading())
         
@@ -135,7 +135,7 @@ class AlmostWorstFitAlgorithmTest(unittest.TestCase):
             bin_ = remaining[0]
 
         return bin_
-    
+
     @staticmethod
     def binOfLoading(loading):
         bin_ = Bin(AlmostWorstFitAlgorithmTest.capacity)

@@ -18,12 +18,12 @@ class AlmostWorstFitAlgorithm(IBinPackingAlgorithmStrategy):
     def findBin(self, item, capacity):
         bin_ = self.bst.select(1)
 
-        if bin_ is not None and item.fintsInto(bin_):
+        if bin_ is not None and item.fitsInto(bin_):
             self.bst.remove(bin_)
         else:
             bin_ = self.bst.select(0)
             
-            if bin_ is not None and item.fintsInto(bin_):
+            if bin_ is not None and item.fitsInto(bin_):
                 self.bst.remove(bin_)
             else:
                 bin_ = Bin(capacity)

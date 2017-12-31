@@ -34,7 +34,7 @@ class WorstFitAlgorithm(IBinPackingAlgorithmStrategy):
         while current is not None:
             _bin = current.key
             
-            if item.fintsInto(_bin):
+            if item.fitsInto(_bin):
                 worst = _bin
             current = current.left
         

@@ -93,3 +93,36 @@ class BestFitAlgorithmTest(unittest.TestCase):
         self.assertEqual(80, bins[0].loading())
         self.assertEqual(40, bins[1].loading())
         
+    def test_findbin2(self):
+        capacity = BestFitAlgorithmTest.capacity
+        sizeItems=[ 50, 90, 10, 20, 40, 70, 15, 60, 15, 22, 91, 34, 50, 13 ]
+        currentIndex = 0
+        binQuantity = 0
+        
+        for size in sizeItems:
+            item = Item(size)
+            bins = self.bestFit.getBins()
+            expectedBin = self.findExpectedBin(bins, item)
+
+            b = self.bestFit.findBin(item, capacity)
+
+            bins = sorted(self.bestFit.getBins())
+            if expectedBin is not None:
+                self.assertEqual(expectedBin, b)
+            else:
+                self.assertEqual(binQuantity + 1, len(bins))
+                self.assertEqual(size, b.loading());
+            
+            binQuantity = len(bins)
+            
+    def findExpectedBin(self, bins, item):
+        fitting = [ e for e in bins if item.fitsInto(e) ]
+        
+        if (len(fitting) == 0):
+            return None
+        
+        fitting.sort(key=lambda x: x.loading(), reverse=True)
+        bests = [ e for e in fitting if e.loading() == fitting[0].loading() ]
+        bests.sort()
+        
+        return bests[0]
