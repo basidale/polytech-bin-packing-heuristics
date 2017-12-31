@@ -1,15 +1,11 @@
 ** TODO:
-* Faire des tests unitaires
 * Faire des statistiques 
   + moyenne, ecart de remplissage des bins
   + Nombre d'étapes
   + en fonction des examples, de la capacité
   + Worst Fit / Almost worst fit comparaison
-* Affichage graphique de la trace
 * Argumenter : quel algorithme est le plus efficace
 * Makefile : Generer 2 scripts
-* Inclure lxml
-* Improve algorithms complexity
 * Rename algorithm -> heuristic
 * Rename bin
 ** Eric :
@@ -23,5 +19,4 @@
 * Ensure that script may be launched from every directory (res ~~)
 * Ensure compatible with project standards
 
-** Maybe:
-* Prevent having bins >= quantity (ItemReader)
+
