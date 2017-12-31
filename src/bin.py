@@ -37,4 +37,3 @@ class Bin:
     
     def __eq__(self, other):
         return self.number == other.number
-

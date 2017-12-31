@@ -3,6 +3,7 @@ from item import Item
 from algorithms import *
 from reader import ItemReader
 from xml_generator import XMLGenerator
+from random import randint
 import os 
 
 if __name__ == '__main__':
@@ -30,4 +31,30 @@ if __name__ == '__main__':
             simulation.run()
             generator = XMLGenerator(simulation)
             generator.generate(outputFilePath)
+
+
+
+    """var = int(input('Entrez le nombre dexemples de tests:'))
+    binSize = input('Entrez la taille des bins :')
+    maxNumberOfPack = int(input('Entrez le nombre maximal de paquets :'))
+    minNumberOfPack = int(input('Entrez la nombre minimal de paquets :'))
+
+    for i in range(var):
+        f = open(sourcePath + '/../res/exemple' + str(i), 'w')
+        f.write('Taille bin\n')
+        f.write(binSize + '\n')
+        f.write('Objets\n')
+        numberOfPack = randint(minNumberOfPack, maxNumberOfPack)
+        for j in range(numberOfPack):
+           packSize = randint(1, int(binSize))
+           f.write(str(packSize))
+           if j < numberOfPack - 1:
+               f.write(', ')
+        f.write('.')
+        f.close()"""
+
+
+
+
+
 
