@@ -30,20 +30,21 @@ class AVLNode:
         self.key = heappop(self.dataQueue)
     
     def addLoading(self, key):
-        if key.loading() > self.minLoading:
+        if key.loading() < self.minLoading:
             self.minLoading = key.loading()
     
-    def removeLoading(self, key):
-        if key.loading() == self.minLoading:
-            self.minLoading = min(self.left.minLoading, self.right.key.minLoading)
-
+    def updateLoading(self):
+        leftLoading = self.left.minLoading if self.left is not None else 0
+        rightLoading = self.right.minLoading if self.right is not None else 0
+        self.minLoading = - min(- leftLoading, - rightLoading, - self.key.loading())
+    
     def sizeOfLeftSubtree(self):
         if self.left is None:
             return 0
         return self.left.size
             
     def display(self, level=0):
-        print('  ' * level + repr(self.key.loading()))
+        print('  ' * level + repr(self.key.loading()) + ' (' + repr(self.key.number) + ')' + ' [ ' + str(self.minLoading) + ' ]')
         if self.left is not None:
             self.left.display(level + 1)
         else:

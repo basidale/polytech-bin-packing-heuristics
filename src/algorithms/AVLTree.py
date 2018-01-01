@@ -21,15 +21,16 @@ class AVLTree:
         toLeft = False
         
         while current is not None:
+            current.addLoading(key)
             if self._compare(current.key, key) == 0:
                 current.addKey(key)
                 return
-            current.addLoading(key)
+            
             parent = current
             toLeft = self._compare(current.key, key) == 1
             current = current.left if toLeft else current.right
             parent.size += 1
-
+            
             
         node = AVLNode(parent, key)
         
@@ -37,7 +38,7 @@ class AVLTree:
             parent.left = node
         else:
             parent.right = node
-        
+
         self._rebalance(parent)
     
     def remove(self, key):
@@ -50,6 +51,11 @@ class AVLTree:
             node.updateKey()
         else:
             self._remove(node)
+
+        while node is not None:
+            if node.key.loading() == node.minLoading:
+                node.updateLoading()
+            node = node.parent
         
         return True
 
@@ -120,6 +126,9 @@ class AVLTree:
         b.size = 1
         b.size += b.left.size if b.left is not None else 0
         b.size += b.right.size if b.right is not None else 0
+
+        b.updateLoading()
+        node.updateLoading()
         
         return b
 
@@ -205,9 +214,6 @@ class AVLTree:
         current = self.root
 
         while current is not None and current.key is not key:
-            if remove:
-                current.removeLoading(key)
-            
             if self._compare(current.key, key) == -1:
                 current = current.right
             else:

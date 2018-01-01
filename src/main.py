@@ -7,7 +7,6 @@ from random import randint
 import argparse
 import os 
 
-
 def executeAll(examples):
     for example in examples:
         exampleName = example.split('.')[0]
@@ -26,11 +25,32 @@ def executeAll(examples):
             outputFileName = outputFileName.lower()
             outputFilePath = sourcePath + '/../simulations/' + outputFileName
             simulation = Simulation(capacity, list(items), algorithm)
-            #simulation.run()
-            
+            simulation.run()
+            #generator = XMLGenerator(simulation)
+            #generator.generate(outputFilePath)
+
+# TODO: Supprimer pour le rendu
+def generateXML(examples):
+    for example in examples:
+        exampleName = example.split('.')[0]
+        inputFilePath = sourcePath + '/../res/' + example
+        items, capacity = ItemReader(inputFilePath).readItems()
+        
+        algorithms = [ FirstFitAlgorithm(),
+                       NextFitAlgorithm(),
+                       WorstFitAlgorithm(),
+                       AlmostWorstFitAlgorithm(),
+                       BestFitAlgorithm() ]
+        
+        for algorithm in algorithms:
+            print(example + " " + algorithm.NAME)
+            outputFileName = algorithm.NAME.replace(' ', '-') + '-' + exampleName + '.xml'
+            outputFileName = outputFileName.lower()
+            outputFilePath = sourcePath + '/../simulations/' + outputFileName
+            simulation = Simulation(capacity, list(items), algorithm)
             generator = XMLGenerator(simulation)
             generator.generate(outputFilePath)
-
+            
 if __name__ == '__main__':
     sourcePath = os.path.dirname(os.path.realpath(__file__))
 
@@ -41,6 +61,10 @@ if __name__ == '__main__':
     if args.run[0] == 'ALGO':
         examples = [ 'exemple100.txt', 'exemple500.txt', 'exemple1000.txt' ]
         executeAll(examples)
+    # TODO: Supprimer pour le rendu
+    elif args.run[0] == 'XML':
+        examples = [ 'exemple100.txt', 'exemple500.txt', 'exemple1000.txt' ]
+        generateXML(examples)
     else:
         print('ERORO')
 
