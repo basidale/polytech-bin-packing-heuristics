@@ -11,7 +11,7 @@ class WorstFitAlgorithm(IBinPackingAlgorithmStrategy):
         
     @staticmethod
     def getName():
-        return NAME
+        return WorstFitAlgorithm.NAME
     
     def findBin(self, item, capacity):
         current = self.bst.root

@@ -9,11 +9,10 @@ class AlmostWorstFitAlgorithm(IBinPackingAlgorithmStrategy):
 
     def __init__(self):
         self.bst = AVLTree(key=lambda x : x.loading())
-        self.bins = list()
         
     @staticmethod
     def getName():
-        return NAME
+        return AlmostWorstFitAlgorithm.NAME
 
     def findBin(self, item, capacity):
         bin_ = self.bst.select(1)
@@ -27,7 +26,6 @@ class AlmostWorstFitAlgorithm(IBinPackingAlgorithmStrategy):
                 self.bst.remove(bin_)
             else:
                 bin_ = Bin(capacity)
-                self.bins.append(bin_)
         
         bin_.addItem(item)
         self.bst.insert(bin_)

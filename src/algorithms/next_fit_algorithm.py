@@ -12,7 +12,7 @@ class NextFitAlgorithm(IBinPackingAlgorithmStrategy):
         
     @staticmethod
     def getName():
-        return NAME
+        return NextFitAlgorithm.NAME
 
     def findBin(self, item, capacity):
         if len(self.bins) == 0:

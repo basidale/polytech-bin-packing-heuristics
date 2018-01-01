@@ -3,34 +3,13 @@ from item import Item
 from algorithms import *
 from reader import ItemReader
 from xml_generator import XMLGenerator
+from stat_scenario import StatExecutionScenario
 from random import randint
 import argparse
 import os 
 
-def executeAll(examples):
-    for example in examples:
-        exampleName = example.split('.')[0]
-        inputFilePath = sourcePath + '/../res/' + example
-        items, capacity = ItemReader(inputFilePath).readItems()
-        
-        algorithms = [ FirstFitAlgorithm(),
-                       NextFitAlgorithm(),
-                       WorstFitAlgorithm(),
-                       AlmostWorstFitAlgorithm(),
-                       BestFitAlgorithm() ]
-        
-        for algorithm in algorithms:
-            print(example + " " + algorithm.NAME)
-            outputFileName = algorithm.NAME.replace(' ', '-') + '-' + exampleName + '.xml'
-            outputFileName = outputFileName.lower()
-            outputFilePath = sourcePath + '/../simulations/' + outputFileName
-            simulation = Simulation(capacity, list(items), algorithm)
-            simulation.run()
-            #generator = XMLGenerator(simulation)
-            #generator.generate(outputFilePath)
 
-# TODO: Supprimer pour le rendu
-def generateXML(examples):
+def executeAll(examples, xml=False):
     for example in examples:
         exampleName = example.split('.')[0]
         inputFilePath = sourcePath + '/../res/' + example
@@ -43,13 +22,16 @@ def generateXML(examples):
                        BestFitAlgorithm() ]
         
         for algorithm in algorithms:
-            print(example + " " + algorithm.NAME)
-            outputFileName = algorithm.NAME.replace(' ', '-') + '-' + exampleName + '.xml'
+            outputFileName = algorithm.getName().replace(' ', '-') + '-' + exampleName + '.xml'
             outputFileName = outputFileName.lower()
             outputFilePath = sourcePath + '/../simulations/' + outputFileName
             simulation = Simulation(capacity, list(items), algorithm)
-            generator = XMLGenerator(simulation)
-            generator.generate(outputFilePath)
+            
+            if xml:
+                generator = XMLGenerator(simulation)
+                generator.generate(outputFilePath)
+            else:
+                simulation.run()
             
 if __name__ == '__main__':
     sourcePath = os.path.dirname(os.path.realpath(__file__))
@@ -58,7 +40,7 @@ if __name__ == '__main__':
     parser.add_argument('--run',
                         nargs=1,
                         required=True,
-                        choices=[ 'ALGO', 'XML'],
+                        choices=[ 'ALGO', 'STAT', 'XML'],
                         help='TODO:')
     
     args = parser.parse_args()
@@ -67,10 +49,12 @@ if __name__ == '__main__':
     if args.run[0] == 'ALGO':
         examples = [ 'exemple100.txt', 'exemple500.txt', 'exemple1000.txt' ]
         executeAll(examples)
+    elif args.run[0] == 'STAT':
+        StatExecutionScenario().execute()
     # TODO: Supprimer pour le rendu
     elif args.run[0] == 'XML':
         examples = [ 'exemple100.txt', 'exemple500.txt', 'exemple1000.txt' ]
-        generateXML(examples)
+        executeAll(examples, True)
     else:
         raise 
 
