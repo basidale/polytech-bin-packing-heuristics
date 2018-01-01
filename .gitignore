@@ -7,3 +7,5 @@ src/algorithms/*~
 /src/test/__pycache__/*
 /src/test/__pycache__
 /src/test/__pycache__/*
+/algo.ex
+/stat.ex

@@ -55,9 +55,15 @@ if __name__ == '__main__':
     sourcePath = os.path.dirname(os.path.realpath(__file__))
 
     parser = argparse.ArgumentParser(description='TODO: write description')
-    parser.add_argument('--run', nargs=1, required=True, help='TODO:')
+    parser.add_argument('--run',
+                        nargs=1,
+                        required=True,
+                        choices=[ 'ALGO', 'XML'],
+                        help='TODO:')
+    
     args = parser.parse_args()
 
+    
     if args.run[0] == 'ALGO':
         examples = [ 'exemple100.txt', 'exemple500.txt', 'exemple1000.txt' ]
         executeAll(examples)
@@ -66,7 +72,7 @@ if __name__ == '__main__':
         examples = [ 'exemple100.txt', 'exemple500.txt', 'exemple1000.txt' ]
         generateXML(examples)
     else:
-        print('ERORO')
+        raise 
 
     """var = int(input('Entrez le nombre dexemples de tests:'))
     binSize = input('Entrez la taille des bins :')
