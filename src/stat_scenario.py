@@ -63,6 +63,7 @@ class StatExecutionScenario:
         self.askForCapacity()
         self.askForNumberOfItems()
         self.askForDistribution()
+        self.askIfSorted()
         
         items=[]
         for i in range(self.numberOfItems):
@@ -109,3 +110,19 @@ class StatExecutionScenario:
         
         dialog = self.distributions[index][1]
         self.randomFunction = dialog(self.capacity)
+
+    def askIfSorted(self):
+        sortFunctions = {
+            0 : lambda items: None,
+            1 : lambda items: items.sort(key=lambda x : x.size),
+            2 : lambda items: items.sort(key=lambda x : x.size, reverse=True) }
+        
+        print('Are items sorted according to their sizes?')
+        print('0=No 1=ascending 2=descending (default=0)')
+        choice = int(input('> '))
+        
+        if choice in sortFunctions:
+            sortFunctions[choice](self.items)
+        
+        if self.numberOfItems < 0:
+            raise ValueError("Number of items must be positive")
