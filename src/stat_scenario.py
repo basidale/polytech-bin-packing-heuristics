@@ -54,22 +54,19 @@ class StatExecutionScenario:
         self.numberOfItems = 0
         self.randomFunction = None
         self.items = []
-    
-    def execute(self):
-        #numberOfSimulation = int(input('Nombre de simulations :'))
-       
-        #for i in range(numberOfSimulation):
+
+    def openDialog(self):
         self.askForHeuristic()
         self.askForCapacity()
         self.askForNumberOfItems()
         self.askForDistribution()
         self.askIfSorted()
         
-        items=[]
         for i in range(self.numberOfItems):
-            items.append(Item(self.randomFunction()))
-
-        simulation = Simulation(self.capacity, items, self.heuristic)
+            self.items.append(Item(self.randomFunction()))
+        
+    def execute(self):
+        simulation = Simulation(self.capacity, self.items, self.heuristic)
         simulation.run()
 
     def askForHeuristic(self):
@@ -119,10 +116,11 @@ class StatExecutionScenario:
         
         print('Are items sorted according to their sizes?')
         print('0=No 1=ascending 2=descending (default=0)')
-        choice = int(input('> '))
-        
-        if choice in sortFunctions:
-            sortFunctions[choice](self.items)
+
+        input_ = input('> ')
+        choice = int(input_) if input_ in ['0', '1', '2'] else 0
+
+        sortFunctions[choice](self.items)
         
         if self.numberOfItems < 0:
             raise ValueError("Number of items must be positive")
