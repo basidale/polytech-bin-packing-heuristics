@@ -8,21 +8,20 @@ class NextFitAlgorithmTest(unittest.TestCase):
 
     def setUp(self):
         self.nextFit = NextFitAlgorithm()
-        self.bins=list()
-        self.bins.append(Bin(NextFitAlgorithmTest.capacity))
     
     def test_findBin(self):
         capacity = NextFitAlgorithmTest.capacity
         sizeItems=[ 50, 90, 10, 20, 40, 70, 15, 60, 15, 22 ]
         currentIndex = 0
-        binQuantity = len(self.bins)
+        binQuantity = 0
 
         for size in sizeItems:
             item = Item(size)
-            b = self.nextFit.findBin(item, capacity, self.bins)
+            b = self.nextFit.findBin(item, capacity)
 
-            if (len(self.bins) > binQuantity):
-                self.assertEqual(binQuantity + 1, len(self.bins))
-            self.assertEqual(b, self.bins[-1])
+            bins = self.nextFit.getBins()
+            if (len(bins) > binQuantity):
+                self.assertEqual(binQuantity + 1, len(bins))
+            self.assertEqual(b, bins[-1])
             
-            binQuantity = len(self.bins)
+            binQuantity = len(bins)

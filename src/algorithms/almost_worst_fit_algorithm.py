@@ -2,31 +2,35 @@ from bin import Bin
 from item import Item
 from .worst_fit_algorithm import WorstFitAlgorithm
 from .bp_algorithm_strategy import IBinPackingAlgorithmStrategy
+from algorithms.AVLTree import AVLTree
 
-class AlmostWorstFitAlgorithm(WorstFitAlgorithm):
+class AlmostWorstFitAlgorithm(IBinPackingAlgorithmStrategy):
     NAME = 'Almost Worst Fit'
 
-    def findBin(self, item, capacity, bins):
-        fitting = [ e for e in bins if item.isFittingInto(e) ]
-        fitting.sort()
-        fitting.sort(key=lambda x: x.loading())
-        bin_ = None
+    def __init__(self):
+        self.bst = AVLTree(key=lambda x : x.loading())
         
-        if (len(fitting) == 0):
-            bin_ = Bin(capacity)
-            bins.append(bin_)
-        else:
-            worsts = [ e for e in fitting if e.loading() == fitting[0].loading() ]
-            remaining = [e for e in fitting if e.loading() > worsts[0].loading() ]
-            
-            if len(remaining) == 0:
-                bin_ = worsts[0]
-            else:
-                bin_ = remaining[0]
+    @staticmethod
+    def getName():
+        return AlmostWorstFitAlgorithm.NAME
 
+    def findBin(self, item, capacity):
+        bin_ = self.bst.select(1)
+
+        if bin_ is not None and item.fitsInto(bin_):
+            self.bst.remove(bin_)
+        else:
+            bin_ = self.bst.select(0)
+            
+            if bin_ is not None and item.fitsInto(bin_):
+                self.bst.remove(bin_)
+            else:
+                bin_ = Bin(capacity)
+        
         bin_.addItem(item)
+        self.bst.insert(bin_)
         
         return bin_
-
-
         
+    def getBins(self):
+        return self.bst.values()

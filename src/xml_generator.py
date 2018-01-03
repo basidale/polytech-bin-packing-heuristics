@@ -9,7 +9,7 @@ class XMLGenerator:
         
     def generate(self, outputFilePath):
         self.generateState()
-
+        
         while not self.simulation.isCompleted():
             self.simulation.step()
             self.stepNo += 1
@@ -34,7 +34,7 @@ class XMLGenerator:
             itemsize.text = str(self.simulation.currentItem.size)
 
         bins = SubElement(step, 'bins')
-        for index, b in enumerate(self.simulation.bins):
+        for index, b in enumerate(sorted(self.simulation.algorithm.getBins())):
             binElement = SubElement(bins, 'bin')
             
             indexElement = SubElement(binElement, 'index')
