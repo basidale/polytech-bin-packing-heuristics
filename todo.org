@@ -8,6 +8,15 @@
 * Makefile : Generer 2 scripts
 * Rename algorithm -> heuristic
 * Rename bin
+* Ensure that script may be launched from every directory (res ~~)
+* Finir tests unitaires
+* Ensure compatible with project standards
+  1) Makefile : Générer scripts
+* Prevent having bins >= quantity (ItemReader)
+
+** Rapport
+* Argumenter : quel algorithme est le plus efficace
+
 ** Eric :
 * Génerer samples aléatoires (loi normale, uniforme, etc)
 
@@ -18,5 +27,4 @@
 * Virer dossier algorithme pour le rendu
 * Ensure that script may be launched from every directory (res ~~)
 * Ensure compatible with project standards
-
 
