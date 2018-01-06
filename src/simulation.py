@@ -15,10 +15,10 @@ class Simulation:
         print('Items : ' + str(self.itemList))
         print('')
 
-        #self.printState()
+        self.printState()
         while not self.isCompleted():
             self.step()
-            #self.printState()
+            self.printState()
 
         self.printState()
         print('\nAlgorithme ' + self.algorithm.NAME + ' terminé.')

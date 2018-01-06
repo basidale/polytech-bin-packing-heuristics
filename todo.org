@@ -14,6 +14,7 @@
   1) Makefile : Générer scripts
 * Prevent having bins >= quantity (ItemReader)
 
+* Check if |bins| > all item size
 ** Rapport
 * Argumenter : quel algorithme est le plus efficace
 
