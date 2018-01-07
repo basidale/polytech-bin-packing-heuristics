@@ -13,8 +13,11 @@ class StatMode:
             self.openDialog()
         
         for scenario in self.scenarios:
+            print('\n')
             scenario.execute()
-
+            scenario.displayDetails()
+            
+            
     def askForANewScenario(self):
         print(self.add_scenario_dialog_msg)
         return True if input('> ') == '1' else False

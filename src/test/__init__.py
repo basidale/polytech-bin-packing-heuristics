@@ -1,9 +1,0 @@
-from .next_fit_algorithm_test import NextFitAlgorithmTest
-from .best_fit_algorithm_test import BestFitAlgorithmTest
-from .worst_fit_algorithm_test import WorstFitAlgorithmTest
-from .almost_worst_fit_algorithm_test import AlmostWorstFitAlgorithmTest
-from .first_fit_algorithm_test import FirstFitAlgorithmTest
-from .bin_bst_test import BinBSTTest
-from .AVLTest import AVLTest
-
-

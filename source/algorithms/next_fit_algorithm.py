@@ -15,14 +15,18 @@ class NextFitAlgorithm(IBinPackingAlgorithmStrategy):
         return NextFitAlgorithm.NAME
 
     def findBin(self, item, capacity):
-        bin_ = self.bins.pop() if len(self.bins) > 0 else None
-
-        if bin_ is None or not item.fitsInto(bin_):
-            bin_ = Bin(capacity)
-        
-        bin_.addItem(item)
+        if len(self.bins) == 0:
+            self.bins.append(Bin(capacity))
+            
+        bin_ = self.bins.pop()
         self.bins.append(bin_)
-        
+            
+        if not item.fitsInto(bin_):
+            bin_ = Bin(capacity)
+            self.bins.append(bin_)
+
+        bin_.addItem(item)
+                
         return bin_
 
     def getBins(self):

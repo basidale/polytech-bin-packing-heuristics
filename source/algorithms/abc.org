@@ -1,0 +1,35 @@
+  # INITIALISATION
+  bst <- creer_arbre_AVL()
+
+  FONCTION chercher_boite(objet, capacité)
+    noeud_courant <- root_of(bst)
+    boite <- NULL
+
+    TANTQUE noeud_courant <> NULL DO
+        SI fits(objet, clef(noeud_courant)) ALORS
+          boite <- clef(noeud_courant)
+        FINSI
+        
+        fils_gauche <- possede_fils_gauche()
+        fils_droit <- possede_fils_droit()
+        traverse_gauche = charge_minimale(gauche(noeud_courant)) + taille(objet) <= capacité
+        traverse_droit = charge_minimale(droit(noeud_courant)) + taille(objet) <= capacité
+        
+        SI fils_gauche ET traverse_gauche ALORS
+          noeud_courant = left_child(noeud_courant)
+        SINON SI boite = NULL AND fis_droit AND traverse_droit
+          noeud_courant = left_child(noeud_courant)
+        SINON
+          boite_courante = NULL
+        FINSI
+    FINTANTQUE
+
+    SI boite = NULL ALORS
+        boite <- creer_boite(DEFAULT_CAPACITY)
+    ELSE
+        supprimer_de(bst, boite)
+    FINSI
+
+    ajouter_item(boite, item)
+  FINFONCTION
+    

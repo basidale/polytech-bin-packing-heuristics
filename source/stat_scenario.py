@@ -46,7 +46,6 @@ class StatExecutionScenario:
 
     distributions = [
         ('Truncated normal distribution (approximation)', dialog_normal_distribution),
-        ('Uniform distribution', dialog_uniform_distribution),
         ('Uniform distribution', dialog_uniform_distribution) ]
     
     def __init__(self):
@@ -55,6 +54,7 @@ class StatExecutionScenario:
         self.numberOfItems = 0
         self.randomFunction = None
         self.items = []
+        self.simulation = None
 
     def openDialog(self):
         self.askForHeuristic()
@@ -67,11 +67,8 @@ class StatExecutionScenario:
             self.items.append(Item(self.randomFunction()))
         
     def execute(self):
-        simulation = Simulation(self.capacity, self.items, self.heuristic)
-        simulation.run()
-
-        print('')
-        print('Chargement moyen : ')
+        self.simulation = Simulation(self.capacity, self.items, self.heuristic)
+        self.simulation.run()
         
     def askForHeuristic(self):
         choices = [ str(i) + "- " + h.getName() for i, h in enumerate(self.heuristics) ]
@@ -128,3 +125,8 @@ class StatExecutionScenario:
         
         if self.numberOfItems < 0:
             raise ValueError("Number of items must be positive")
+
+    def displayDetails(self):
+        print('Chargement moyen : ' + str(self.simulation.meanLoading()))
+        print('Nombre de boites ouvertes : ' + str(self.simulation.binQuantity()))
+        
