@@ -12,7 +12,7 @@ test:
 	python src/test.py
 
 clean:
-	rm algo.ex stat.ex
+	rm -f algo.ex stat.ex
 
 # TODO: remove
 xml:

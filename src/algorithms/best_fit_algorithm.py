@@ -19,7 +19,7 @@ class BestFitAlgorithm(IBinPackingAlgorithmStrategy):
         
         while current is not None:
             _bin = current.key
-            
+             
             if item.fitsInto(_bin):
                 best = _bin
                 if _bin.residual() == item.size:

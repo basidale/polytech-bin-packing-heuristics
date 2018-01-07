@@ -70,6 +70,9 @@ class StatExecutionScenario:
         simulation = Simulation(self.capacity, self.items, self.heuristic)
         simulation.run()
 
+        print('')
+        print('Chargement moyen : ')
+        
     def askForHeuristic(self):
         choices = [ str(i) + "- " + h.getName() for i, h in enumerate(self.heuristics) ]
         choices = '\n  ' + '\n  '.join(choices)

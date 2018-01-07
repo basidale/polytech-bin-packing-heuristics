@@ -1,32 +1,27 @@
 from bin import Bin
 from item import Item
 from .bp_algorithm_strategy import IBinPackingAlgorithmStrategy
+from collections import deque
 
 # Algorithme glouton
 class NextFitAlgorithm(IBinPackingAlgorithmStrategy):
     NAME = 'Next Fit'
 
     def __init__(self):
-        self.currentBinIndex = 0
-        self.bins = [ ]
+        self.bins = deque()
         
     @staticmethod
     def getName():
         return NextFitAlgorithm.NAME
 
     def findBin(self, item, capacity):
-        if len(self.bins) == 0:
-            self.bins.append(Bin(capacity))
+        bin_ = self.bins.pop() if len(self.bins) > 0 else None
+
+        if bin_ is None or not item.fitsInto(bin_):
+            bin_ = Bin(capacity)
         
-        # If the item does not fits into the current bin,
-        # add one bin to the list and increment current bin index
-        if (not item.fitsInto(self.bins[self.currentBinIndex])):
-            self.bins.append(Bin(capacity))
-            self.currentBinIndex += 1
-        
-        # Add the item to the current bin
-        bin_ = self.bins[self.currentBinIndex]
         bin_.addItem(item)
+        self.bins.append(bin_)
         
         return bin_
 

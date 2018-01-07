@@ -29,3 +29,6 @@
 * Ensure that script may be launched from every directory (res ~~)
 * Ensure compatible with project standards
 
+
+* Rapport:
+- Légende chargement

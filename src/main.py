@@ -13,7 +13,6 @@ import os
             
 if __name__ == '__main__':
     sourcePath = os.path.dirname(os.path.realpath(__file__))
-
     parser = argparse.ArgumentParser(description='TODO: write description')
     parser.add_argument('--run',
                         nargs=1,
@@ -24,8 +23,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     examples = [ 'exemple100.txt', 'exemple500.txt', 'exemple1000.txt' ]
-    
-    mode = None
     
     if args.run[0] == 'ALGO':
         mode = AlgoMode().start(examples)
